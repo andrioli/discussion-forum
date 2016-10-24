@@ -1,8 +1,14 @@
 class PostsController < ApplicationController
 
+  # Maximum number of records per page we want to show
+  # For simplicity this was set as a constant
+  PER_PAGE = 10
+
   # GET /posts
   def index
-    @posts = Post.all
+    # Pagination is implemented with `limit` and `offset`
+    # I don't wanna use any gem for this job
+    @posts = Post.limit(PER_PAGE).offset(offset)
   end
 
   # GET /posts/1
@@ -29,5 +35,15 @@ class PostsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
       params.permit(:title, :email, :body)
+    end
+
+    # Utility method for requested page number
+    def page
+      [params[:page].to_i, 1].max
+    end
+
+    # Utility method for offset
+    def offset
+      (page - 1) * PER_PAGE
     end
 end

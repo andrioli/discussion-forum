@@ -9,6 +9,14 @@ class PostsControllerTest < ActionController::TestCase
     get :index, format: :json
     assert_response :success
     assert_not_nil assigns(:posts)
+    assert_not_empty assigns(:posts)
+  end
+
+  test "should get index in second page" do
+    get :index, format: :json, page: 2
+    assert_response :success
+    assert_not_nil assigns(:posts)
+    assert_empty assigns(:posts)
   end
 
   test "should create post" do
