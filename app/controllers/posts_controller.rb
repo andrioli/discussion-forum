@@ -10,7 +10,7 @@ class PostsController < ApplicationController
     @page = page
     # Pagination is implemented with `limit` and `offset`
     # I don't wanna use any gem for this job
-    @posts = Post.limit(PER_PAGE).offset(offset)
+    @posts = Post.order(updated_at: :desc).limit(PER_PAGE).offset(offset)
   end
 
   # GET /posts/1
