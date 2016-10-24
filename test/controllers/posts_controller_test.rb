@@ -23,9 +23,24 @@ class PostsControllerTest < ActionController::TestCase
     assert_equal 1, assigns(:page)
   end
 
+  test "title is required" do
+    post :create, format: :json, email: @post.email, body: @post.body
+    assert_response :unprocessable_entity
+  end
+
+  test "email is required" do
+    post :create, format: :json, title: @post.title, body: @post.body
+    assert_response :unprocessable_entity
+  end
+
+  test "body is required" do
+    post :create, format: :json, title: @post.title, email: @post.email
+    assert_response :unprocessable_entity
+  end
+
   test "should create post" do
     assert_difference('Post.count') do
-      post :create, format: :json
+      post :create, format: :json, title: @post.title, email: @post.email, body: @post.body
     end
 
     assert_response :created
