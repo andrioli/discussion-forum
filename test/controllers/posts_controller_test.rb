@@ -24,4 +24,9 @@ class PostsControllerTest < ActionController::TestCase
     get :show, id: @post, format: :json
     assert_response :success
   end
+
+  test "post not found" do
+    get :show, id: rand(100), format: :json
+    assert_response :not_found
+  end
 end

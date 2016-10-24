@@ -20,6 +20,11 @@ class PostsController < ApplicationController
     end
   end
 
+  # Handle record not found exception
+  rescue_from(ActiveRecord::RecordNotFound) do |e|
+    render json: { message: 'Not found' }, status: :not_found
+  end
+
   private
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
