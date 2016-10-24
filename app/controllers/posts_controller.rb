@@ -37,9 +37,14 @@ class PostsController < ApplicationController
       params.permit(:title, :email, :body)
     end
 
+    # Utility method to know how many pages are available
+    def total_pages
+      (Post.count + PER_PAGE - 1) / PER_PAGE # Taking advantage from integer division
+    end
+
     # Utility method for requested page number
     def page
-      [params[:page].to_i, 1].max
+      [[params[:page].to_i, 1].max, total_pages].min
     end
 
     # Utility method for offset
