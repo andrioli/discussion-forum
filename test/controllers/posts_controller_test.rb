@@ -10,6 +10,8 @@ class PostsControllerTest < ActionController::TestCase
     assert_response :success
     assert_not_nil assigns(:posts)
     assert_not_empty assigns(:posts)
+    assert_equal 1, assigns(:total_pages)
+    assert_equal 1, assigns(:page)
   end
 
   test "should get index in second page" do
@@ -17,6 +19,8 @@ class PostsControllerTest < ActionController::TestCase
     assert_response :success
     assert_not_nil assigns(:posts)
     assert_not_empty assigns(:posts)
+    assert_equal 1, assigns(:total_pages)
+    assert_equal 1, assigns(:page)
   end
 
   test "should create post" do

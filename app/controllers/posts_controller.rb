@@ -6,6 +6,8 @@ class PostsController < ApplicationController
 
   # GET /posts
   def index
+    @total_pages = total_pages
+    @page = page
     # Pagination is implemented with `limit` and `offset`
     # I don't wanna use any gem for this job
     @posts = Post.limit(PER_PAGE).offset(offset)
