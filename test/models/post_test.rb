@@ -15,4 +15,9 @@ class PostTest < ActiveSupport::TestCase
     @post.body = 'I dont give a shit'
     assert_equal('I dont give a ****', @post.body)
   end
+
+  test "new comment mat_path" do
+    @post.id = '1'
+    assert_equal('/1/', @post.new_comment.mat_path)
+  end
 end

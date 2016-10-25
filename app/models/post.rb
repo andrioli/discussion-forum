@@ -18,4 +18,10 @@ class Post < ActiveRecord::Base
     end unless censored_body.nil?
     return censored_body
   end
+
+  def new_comment(params = {})
+    post = Post.new(params)
+    post[:mat_path] = "#{self.mat_path}#{self.id}/"
+    return post
+  end
 end
