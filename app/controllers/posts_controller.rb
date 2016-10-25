@@ -10,7 +10,7 @@ class PostsController < ApplicationController
     @page = page
     # Pagination is implemented with `limit` and `offset`
     # I don't wanna use any gem for this job
-    @posts = Post.order(updated_at: :desc).limit(PER_PAGE).offset(offset)
+    @posts = posts.order(updated_at: :desc).limit(PER_PAGE).offset(offset)
   end
 
   # GET /posts/1
@@ -49,9 +49,14 @@ class PostsController < ApplicationController
       params.permit(:title, :email, :body)
     end
 
+    # Utility method for posts query
+    def posts
+      Post.where(mat_path: '/')
+    end
+
     # Utility method to know how many pages are available
     def total_pages
-      (Post.count + PER_PAGE - 1) / PER_PAGE # Taking advantage from integer division
+      (posts.count + PER_PAGE - 1) / PER_PAGE # Taking advantage from integer division
     end
 
     # Utility method for requested page number
