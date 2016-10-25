@@ -56,4 +56,33 @@ class PostsControllerTest < ActionController::TestCase
     get :show, id: rand(100), format: :json
     assert_response :not_found
   end
+
+  test "reply title is required" do
+    post :reply, format: :json, id: @post.id, email: @post.email, body: @post.body
+    assert_response :unprocessable_entity
+  end
+
+  test "reply email is required" do
+    post :create, format: :json, id: @post.id, title: @post.title, body: @post.body
+    assert_response :unprocessable_entity
+  end
+
+  test "reply body is required" do
+    post :create, format: :json, id: @post.id, title: @post.title, email: @post.email
+    assert_response :unprocessable_entity
+  end
+
+  test "should create post reply" do
+    assert_difference('Post.count') do
+      post :reply, format: :json, id: @post.id, title: @post.title, email: @post.email, body: @post.body
+    end
+
+    assert_response :created
+    assert_not_nil assigns(:post)
+  end
+
+  test "post reply not found" do
+    post :reply, format: :json, id: rand(100), title: @post.title, email: @post.email, body: @post.body
+    assert_response :not_found
+  end
 end

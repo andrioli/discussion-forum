@@ -28,6 +28,16 @@ class PostsController < ApplicationController
     end
   end
 
+  # POST /posts/1/comments
+  def reply
+    @post = Post.find(params[:id]).new_comment(post_params)
+    if @post.save
+      render :show, status: :created, location: @post
+    else
+      render json: @post.errors, status: :unprocessable_entity
+    end
+  end
+
   # Handle record not found exception
   rescue_from(ActiveRecord::RecordNotFound) do |e|
     render json: { message: 'Not found' }, status: :not_found

@@ -55,4 +55,6 @@ Rails.application.routes.draw do
   #   end
   resources :posts, only: [:index, :show, :create],
     :format => false, defaults: { format: :json }
+  post 'posts/:id/comments' => 'posts#reply',
+    :format => false, defaults: { format: :json }
 end
