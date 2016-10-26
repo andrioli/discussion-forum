@@ -53,6 +53,8 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+  get "/" => "errors#not_found"
+  get "/404" => "errors#not_found"
   resources :posts, only: [:index, :show, :create],
     :format => false, defaults: { format: :json }
   post 'posts/:id/comments' => 'posts#reply',
