@@ -24,4 +24,8 @@ class Post < ActiveRecord::Base
     post[:mat_path] = "#{self.mat_path}#{self.id}/"
     return post
   end
+
+  def comments
+    return Post.where(mat_path: self.new_comment.mat_path).order(updated_at: :desc)
+  end
 end
