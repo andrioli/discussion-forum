@@ -4,7 +4,7 @@ This is a simple discussion forum API written in Ruby on Rails framework.
 
 ## Running Locally
 
-Make sure you have [Ruby](https://www.ruby-lang.org) (>= 2.0.0) and [Bundler](http://bundler.io) installed.
+Make sure you have [Ruby](https://www.ruby-lang.org) (>= 1.9.3) and [Bundler](http://bundler.io) installed.
 
 ```sh
 git clone git@github.com:andrioli/discussion-forum.git
