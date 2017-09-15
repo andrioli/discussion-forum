@@ -1,5 +1,7 @@
 # discussion-forum
 
+[![Build Status](https://travis-ci.org/andrioli/discussion-forum.svg?branch=master)](https://travis-ci.org/andrioli/discussion-forum)
+
 This is a simple discussion forum API written in Ruby on Rails framework.
 
 ## Running Locally
